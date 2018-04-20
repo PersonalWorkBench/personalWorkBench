@@ -1,7 +1,6 @@
 package Model;
 
 public class UserModel {
-<<<<<<< HEAD
 	private int ID , authority;
 	private String userID, userPass , name , sex , personalID, number, date, workBenchID, personalPic ,address, others, others1;
 	public String getAddress() {
@@ -88,7 +87,5 @@ public class UserModel {
 	public void setOthers1(String others1) {
 		this.others1 = others1;
 	}
-=======
->>>>>>> parent of f1b1feb... 0419進度
 	
 }

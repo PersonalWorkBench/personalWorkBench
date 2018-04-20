@@ -7,6 +7,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import Impl.UserImpl;
+import Model.UserModel;
 
 
 @WebServlet("/userServlet")
@@ -23,7 +27,6 @@ public class UserServlet extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-<<<<<<< HEAD
 		request.setCharacterEncoding("utf-8");
 		HttpSession session =request.getSession();
 		UserModel usermodel = new UserModel();
@@ -68,10 +71,6 @@ public class UserServlet extends HttpServlet {
 		
 		
 		}
-=======
-		
-		doGet(request, response);
->>>>>>> parent of f1b1feb... 0419進度
 	}
 
-}
+
