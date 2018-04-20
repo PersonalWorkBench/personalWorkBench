@@ -1,9 +1,6 @@
 package Servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,59 +15,61 @@ import Model.UserModel;
 
 @WebServlet("/userServlet")
 public class UserServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    
+	private static final long serialVersionUID = 1L;  
     public UserServlet() {
-        super();
-        
+        super();      
     }
-
-	
-	public void init(ServletConfig config) throws ServletException {
-		
+	public void init(ServletConfig config) throws ServletException {	
 	}
-
-	
-	public void destroy() {
-		
+	public void destroy() {	
 	}
-
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
-
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session =request.getSession();
-		//UserModel usermodel = new UserModel();
+		UserModel usermodel = new UserModel();
+		UserImpl uesrImpl = new UserImpl();
 		String status = request.getParameter("status");
-		if(status.equals("login")) {
-			UserImpl uesrImpl = new UserImpl();
+		if(status.equals("login")) {                              //帳號登入Servlet
+			
 			String account = request.getParameter("account");
 			String pass = request.getParameter("pass");
-			int login=uesrImpl.userModel(account,pass);
-			switch(login) {
+			int login=uesrImpl.lognin(account,pass);
+			switch(login) {   //0為帳號密碼錯誤 //1為管理者登入 2為使用者正常登
 			case 0:
-				response.sendRedirect("login.jsp?login=false");
+				response.sendRedirect("User/login.jsp?login=false");
 				request.setAttribute("redirect", "redirect");
 				break;
 			case 1:
 				session.setAttribute("account",account); //remember User ID
-				request.getRequestDispatcher("/User/admin.jsp").forward(request, response);
+				request.getRequestDispatcher("/Admin/admin.jsp").forward(request, response);
 				break;
 			case 2:
-				request.getRequestDispatcher("/index.jsp").forward(request, response);
+				session.setAttribute("account",account); //remember User ID
+			 	request.getRequestDispatcher("/index.jsp").forward(request, response);
 				break;
-			
 			}
-			
-			
-
+		}
+		if(status.equals("signin")) {        //帳號註冊Servlet
+			usermodel.setUserID(request.getParameter("account"));
+			usermodel.setUserPass(request.getParameter("pass"));
+			usermodel.setName(request.getParameter("name"));
+			usermodel.setPersonalID(request.getParameter("personalID"));
+			usermodel.setNumber(request.getParameter("number"));
+			usermodel.setDate(request.getParameter("date"));
+			usermodel.setSex(request.getParameter("sex"));
+			usermodel.setAddress(request.getParameter("address"));
+			usermodel.setPersonalPic(request.getParameter("personalPic"));
+			boolean signin=uesrImpl.signin(usermodel);
+			if(signin == true) {
+				System.out.println("sign in suss");
 			}
+		
+		}
+		
+		
 		}
 	}
 

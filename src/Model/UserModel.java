@@ -2,6 +2,13 @@ package Model;
 
 public class UserModel {
 	private int ID , authority;
+	private String userID, userPass , name , sex , personalID, number, date, workBenchID, personalPic ,address, others, others1;
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
 	public int getID() {
 		return ID;
 	}
@@ -14,11 +21,11 @@ public class UserModel {
 	public void setAuthority(int authority) {
 		this.authority = authority;
 	}
-	public String getUserCount() {
-		return userCount;
+	public String getUserID() {
+		return userID;
 	}
-	public void setUserCount(String userCount) {
-		this.userCount = userCount;
+	public void setUserID(String userID) {
+		this.userID = userID;
 	}
 	public String getUserPass() {
 		return userPass;
@@ -80,5 +87,5 @@ public class UserModel {
 	public void setOthers1(String others1) {
 		this.others1 = others1;
 	}
-	private String userCount, userPass , name , sex , personalID, number, date, workBenchID, personalPic , others, others1;
+	
 }

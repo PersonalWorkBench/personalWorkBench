@@ -5,10 +5,12 @@ CREATE TABLE personalworkbench.`user` (
   name VARCHAR(45) NOT NULL,
   sex VARCHAR(45) NOT NULL,
   personalID VARCHAR(45) NOT NULL,
+  number VARCHAR(45) NOT NULL,
+  address VARCHAR(45) NULL,
   date VARCHAR(45) NOT NULL,
   authority VARCHAR(45) NOT NULL,
-  workBenchID VARCHAR(45) NOT NULL,
   personalPic VARCHAR(45) NULL,
+
   others VARCHAR(45) NULL,
   others1 VARCHAR(45) NULL,
   PRIMARY KEY (ID),

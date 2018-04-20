@@ -1,6 +1,5 @@
 CREATE TABLE `personalworkbench`.`workbench` (
   `ID` INT NOT NULL AUTO_INCREMENT,
-  `userID` VARCHAR(45) NOT NULL,
   `workBenchID` VARCHAR(45) NOT NULL,
   `workBenchName` VARCHAR(45) NOT NULL,
   `taxNumber` VARCHAR(45) NOT NULL,
