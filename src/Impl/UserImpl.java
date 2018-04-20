@@ -1,5 +1,6 @@
 package Impl;
 
+<<<<<<< HEAD
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -71,4 +72,8 @@ public class UserImpl {
 			DbConnection.getutils().close(conn);
 		}return false;		
 	}
+=======
+public class UserImpl {
+
+>>>>>>> parent of f1b1feb... 0419進度
 }
