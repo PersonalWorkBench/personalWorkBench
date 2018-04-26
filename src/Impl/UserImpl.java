@@ -14,9 +14,10 @@ public class UserImpl {
 	PreparedStatement ps = null; 
 	public int lognin(String account, String pass){
 		UserModel usermodel = new UserModel();
+		conn = DbConnection.getutils().getConnection();
 		ResultSet rs=null;
 		try {
-			conn = DbConnection.getutils().getConnection();
+		
 			ps = conn.prepareStatement("select * from User where userID=?");
 			ps.setString(1,account);
 			rs = ps.executeQuery();
@@ -70,5 +71,41 @@ public class UserImpl {
 			DbConnection.getutils().close(ps);
 			DbConnection.getutils().close(conn);
 		}return false;		
+	}
+	public boolean oldPassSearch(String account ,String oldPass) {  //check oldpassword
+		ResultSet rs=null;
+		try {
+			ps = conn.prepareStatement("where userID=? and userPass=?");
+			ps.setString(1,account);
+			ps.setString(2, oldPass);
+			rs = ps.executeQuery();
+			if(!oldPass.equals(rs.getString("userPass"))) {
+				return false;
+			} else return true;
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DbConnection.getutils().close(rs);
+			DbConnection.getutils().close(ps);
+			DbConnection.getutils().close(conn);
+		}
+		return true;
+	}
+	public  void newPassChange(String account, String newPass) {  //Exchange new Password
+		
+		try {
+			ps=conn.prepareStatement("update User set userPass=? where UserID =?");
+			ps.setString(1, newPass);
+			ps.setString(2, account);
+			ps.execute();
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			DbConnection.getutils().close(ps);
+			DbConnection.getutils().close(conn);
+		}
 	}
 }

@@ -30,24 +30,24 @@ public class UserServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session =request.getSession();
 		UserModel usermodel = new UserModel();
-		UserImpl uesrImpl = new UserImpl();
+		UserImpl userImpl = new UserImpl();
 		String status = request.getParameter("status");
 		if(status.equals("login")) {                              //帳號登入Servlet
 			
 			String account = request.getParameter("account");
 			String pass = request.getParameter("pass");
-			int login=uesrImpl.lognin(account,pass);
+			int login=userImpl.lognin(account,pass);
 			switch(login) {   //0為帳號密碼錯誤 //1為管理者登入 2為使用者正常登
 			case 0:
 				response.sendRedirect("User/login.jsp?login=false");
 				request.setAttribute("redirect", "redirect");
 				break;
 			case 1:
-				session.setAttribute("account",account); //remember User ID
+				session.setAttribute("userID",account); //remember User ID
 				request.getRequestDispatcher("/Admin/admin.jsp").forward(request, response);
 				break;
 			case 2:
-				session.setAttribute("account",account); //remember User ID
+				session.setAttribute("userID",account); //remember User ID
 			 	request.getRequestDispatcher("/index.jsp").forward(request, response);
 				break;
 			}
@@ -62,11 +62,26 @@ public class UserServlet extends HttpServlet {
 			usermodel.setSex(request.getParameter("sex"));
 			usermodel.setAddress(request.getParameter("address"));
 			usermodel.setPersonalPic(request.getParameter("personalPic"));
-			boolean signin=uesrImpl.signin(usermodel);
+			boolean signin=userImpl.signin(usermodel);
 			if(signin == true) {
 				System.out.println("sign in suss");
 			}
 		
+		}
+		if(status.equals("profileExchange")) { //密碼更換
+			//String account= (String)session.getAttribute("userID");
+			String account ="0001";
+			
+			String oldPass= request.getParameter("oldPass");
+			String newPass= request.getParameter("newPass");
+			System.out.println(oldPass +"  new:" + newPass);
+			boolean checkoldPass = userImpl.oldPassSearch(account,oldPass);
+			if(checkoldPass == true) {
+				userImpl.newPassChange(account , newPass);
+				System.out.println("Exchange suss");	
+			}
+		}else {
+			System.out.println("Exchange unsuss");
 		}
 		
 		

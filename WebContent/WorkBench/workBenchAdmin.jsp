@@ -4,11 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>首頁</title>
+<title>Insert title here</title>
 </head>
 <body>
-	<a href="WorkBench/signin.jsp">工作室註冊</a>
-	<a href="WorkBench/workBenchAdmin.jsp">工作室管理</a>
-	<a href="User/userAdmin.jsp">個人資料管理</a>
+
 </body>
 </html>
